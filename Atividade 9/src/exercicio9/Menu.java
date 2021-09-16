@@ -7,6 +7,7 @@ public class Menu {
 	public static void main(String[] args) {
 		GestaoAlunos sla = new GestaoAlunos();
 		Scanner scan = new Scanner(System.in);
+		sla.inicioAlunos();
 		while(true) {
 			System.out.println("(C)riar           (E)xibir             (R)emover               \r\n"
 					+ "                (A)tualizar    (S)air\r\n"
@@ -18,15 +19,17 @@ public class Menu {
 				sla.criar();
 				break;
 			case 69:
-				sla.exibir();
+				System.out.println(sla.exibir());
 				break;
 			case 82:
-				sla.excluir();
+				System.out.println(sla.excluir());;
 				break;
 			case 65:
-				sla.atualizar();
+				System.out.println(sla.atualizar());;
 				break;
 			case 83:
+				System.out.println("Encerrando...");
+				scan.close();
 				System.exit(0);
 				break;
 			default:

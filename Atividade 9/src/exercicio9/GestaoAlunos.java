@@ -5,70 +5,72 @@ import java.util.Scanner;
 import javax.swing.JOptionPane;
 
 public class GestaoAlunos {
-	int indice;
-	Aluno alunos [];
+	int indice = 0;
+	Aluno alunos[] = new Aluno[50];
 	
-	void criar() {
-		Aluno aluno = new Aluno();
-		Scanner scan = new Scanner(System.in);
-		System.out.println("Informe o ID do aluno:");
-		aluno.id =scan.nextLong();
-		System.out.println("Informe a data de nascimento do aluno:");
-		aluno.nascimento = scan.next();
-		System.out.println("Informe o RA do aluno:");
-		aluno.ra = scan.next();
-		System.out.println("Informe o nome do aluno:");
-		aluno.nome = scan.next();
-		alunos[indice] = aluno;
-		JOptionPane.showInputDialog("Aluno gravado com sucesso!");
-		indice++;
-		scan.close();
+	void inicioAlunos() {
+		for (int j = 0; j < 50; j++) {
+			Aluno x = new Aluno(0, "", "", "");
+			alunos[j] = x;
+		}
 	}
 	
-	void atualizar() {
+	void criar() {
+		Scanner scan = new Scanner(System.in);
+		System.out.println("Informe o ID do aluno:");
+		long id =scan.nextLong();
+		System.out.println("Informe a data de nascimento do aluno:");
+		String nascimento = scan.next();
+		System.out.println("Informe o RA do aluno:");
+		String ra = scan.next();
+		System.out.println("Informe o nome do aluno:");
+		String nome = scan.next();
+		Aluno aluno = new Aluno(id, nascimento, ra, nome);
+		this.alunos[indice] = aluno;
+		this.indice++;
+		System.out.println("Aluno gravado com sucesso!");
+		
+	}
+	
+	public String atualizar() {
 		Scanner scan = new Scanner(System.in);
 		System.out.println("Informe o RA do aluno que queira atualizar os dados:");
 		String x = scan.next();
-		for (int i = 0; i <= alunos.length; i++) {
-			if (alunos[i].ra.contains(x)) {
+		for (int i = 0; i < 50; i++) {
+			if (alunos[i].ra.equals(x)) {
 				System.out.println("Informe o 'novo nome' do aluno:");
 				alunos[i].nome = scan.next();
 				System.out.println("Informe a 'nova data de nascimento' do aluno:");
 				alunos[i].nascimento = scan.next();
-				JOptionPane.showInputDialog("Dados atualizados com sucesso!");
-			}else {
-				System.out.println("RA de aluno não encontrado!");
+				return "Dados atualizados com sucesso!";
 			}
 		}
-		scan.close();
+		return "RA de aluno não encontrado!";
 	}
 	
-	void exibir() {
+	public String exibir() {
 		Scanner scan = new Scanner(System.in);
 		System.out.println("Informe o RA do aluno que queira ver a info:");
 		String x = scan.next();
-		for (Aluno aluno : alunos) {
-			if (aluno.ra.contains(x)) {
-				aluno.toString();
-			}else {
-				System.out.println("RA de aluno não encontrado!");
+		for (int i = 0; i < 50; i++) {
+			if (alunos[i].ra.equals(x)) {
+				return alunos[i].toString();
 			}
-
-		}
-		scan.close();
+		}	
+		return "RA de aluno não encontrado!";
 	}
 	
-	void excluir() {
+	public String excluir() {
 		Scanner scan = new Scanner(System.in);
 		System.out.println("Informe o RA do aluno que queira excluir:");
 		String x = scan.next();
-		for (int i = 0; i <= alunos.length; i++) {
-			if (alunos[i].ra.contains(x)) {
+		for (int i = 0; i < 50; i++) {
+			if (alunos[i].ra.equals(x)) {
+				Aluno aux = alunos[i];
 				alunos[i] = null;
-			}else {
-				System.out.println("RA de aluno não encontrado!");
+				return aux.toStringDel();
 			}
 		}
-		scan.close();
+		return "RA de aluno não encontrado!";
 	}
 }
